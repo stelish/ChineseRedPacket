@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Red Packet</title>
+    <style>
+        #lid{
+            width:110px;
+            height:60px;
+            border-bottom-left-radius: 25%;
+            border-bottom-right-radius: 25%;
+            background-color: red;
+            z-index: 1001;
+            box-shadow: inset 0px 5px 20px #444;
+        }
+
+        .close #lid{
+            position: absolute;
+            transform-origin: top;
+            top:60px;
+            transform: rotateX(0deg);
+        }
+
+        .open #lid{
+            position: absolute;
+            transform-origin: top;
+            transition: transform 400ms 0ms, top 400ms 0ms;
+            top:90px;
+            transform: rotateX(180deg);
+        }
+        #packetBody{
+            background-color: red;
+            padding:5px;
+            top: 75px;
+            position: absolute;
+            width:100px;
+            overflow: hidden;
+            max-width: 100px;
+            height:225px;
+            box-shadow: inset 0px 50px 35px #444;
+        }
+        #packet{
+            width:120px;
+            height:300px;
+            padding:5px;
+            position: absolute;
+            bottom: -300px;
+            overflow: hidden;
+            transition: transform 400ms 0ms, bottom 400ms 200ms;
+        }
+
+        .in #packet{
+            bottom: 0 !important;
+        }
+
+        .out #packet{
+            bottom: -150px !important;
+        }
+
+        #container{
+            width:120px;
+            height:300px;
+            border: solid 1px black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .good-luck-img{
+            width:80px;
+            height:93px;
+            margin-left: -10px;
+            margin-top: 20px;
+        }
+        .happy-new-year-text{
+            margin-left: -15px;
+        }
+
+        #confetti-canvas{
+            position: absolute;
+            width:120px;
+            height:300px;
+        }
+
+        #offer{
+            width: 100px;
+            height: 40px;
+            background-color: white;
+            position: absolute;
+            top: 80px;
+            left: 10px;
+            display: none;
+            box-shadow: inset 0px -4px 15px #999;
+            transition: transform 400ms 0ms, height 400ms 200ms;
+            overflow:hidden;
+        }
+
+        .open #offer {
+            height: 35px;
+            z-index: 1006;
+            display: block;
+        }
+
+        .out #offer {
+            transition: transform 400ms 200ms, top 400ms 200ms, height 400ms 200ms;
+            height: 230px;
+            top: 40px;
+        }
+
+        .offer-text {
+            display: block;
+            text-align: center;
+            max-width: 90px;
+        }
+
+        /*.out .offer-text {*/
+            /*transition: transform 400ms 200ms, display 600ms 400ms;*/
+            /*display:block;*/
+        /*}*/
+    </style>
+    <script type="text/javascript" src="js/confetti.js"></script>
+</head>
+<body>
+    <div id="container" class="close">
+        <canvas id="confetti-canvas"></canvas>
+
+        <div id="packet">
+            <div id="lid">
+
+            </div>
+            <!--<div id="lid-cutout"></div>-->
+
+            <div id="packetBody">
+                <div style="display: inline-flex;margin-top: 60px;">
+                    <img src="img/good-luck.png" class="good-luck-img">
+                    <img src="img/ChineseHappyNewYear.png" class="happy-new-year-text">
+                </div>
+            </div>
+        </div>
+
+        <div id="offer">
+            <div class="offer-text">
+                <p>Shanghai:</p>
+                <div>
+                    <div><h1 style="margin-bottom: 0; margin-top: 0;margin-left:5px">$499</h1></div>
+                    <div style="float: right;margin-right: 10px;margin-top: -10px;"><small>return</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            // setup confetti
+            var confetti = new Confetti(document.getElementById('confetti-canvas'));
+            confetti.init();
+            setTimeout(function(){
+                document.getElementById('container').classList.add('in');
+            },1000);
+            setTimeout(function(){
+                document.getElementById('container').className = "animation-delay in open";
+            },3000);
+
+            setTimeout(function(){
+                document.getElementById('container').className = "animation-delay out open";
+            },5000);
+        })();
+    </script>
+
+</body>
+</html>
